@@ -1,0 +1,13 @@
+# 排除编译产物
+target/
+
+# 排除IDE和编辑器生成的文件和目录
+.idea/
+*.iml
+*.ipr
+*.iws
+.vscode/
+
+# 排除临时文件
+*.log
+*.tmp
