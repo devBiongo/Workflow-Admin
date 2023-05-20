@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * token过滤器
  *
- * @author BionGo
+ * @author Joffrey
  */
 @Component
 public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
@@ -21,26 +21,14 @@ public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response,
                                     FilterChain chain) throws ServletException, IOException {
-        System.out.println("这里是卢本伟广场");
-//        String token = JwtUtil.getJWT(request);
-//        if (StringUtils.hasText(token)) {
-//            LoginUser loginUser = null;
-//            try {
-//                Claims claims = JwtUtil.parseJWT(token);
-//                loginUser = redisCache.getCacheObject(CacheConstant.LOGIN_KEY + claims.getId());
-//            } catch (Exception e) {
-//                AuthenticationContextHolder.clearContext();
-//                String message = e.getMessage();
-//                if(e instanceof ExpiredJwtException) message = "令牌已过期，请重新登录";
-//                if(e instanceof MalformedJwtException||e instanceof SignatureException) message = "令牌非法";
-//                authenticationEntryPoint.commence(request, response, new AuthenticationErrorException(message));
-//                return;
-//            }
-//            UsernamePasswordAuthenticationToken authenticationToken =
-//                    new UsernamePasswordAuthenticationToken(loginUser, null, loginUser.getAuthorities());
+//        LoginUser loginUser = tokenService.getLoginUser(request);
+//        if (StringUtils.isNotNull(loginUser) && StringUtils.isNull(SecurityUtils.getAuthentication()))
+//        {
+//            tokenService.verifyToken(loginUser);
+//            UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(loginUser, null, loginUser.getAuthorities());
 //            authenticationToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
 //            SecurityContextHolder.getContext().setAuthentication(authenticationToken);
 //        }
-//        chain.doFilter(request, response);
+        chain.doFilter(request, response);
     }
 }

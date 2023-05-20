@@ -1,9 +1,9 @@
 package com.wf.core.config;
 
-import com.wf.core.security.handle.AccessDeniedHandlerImpl;
-import com.wf.core.security.handle.AuthenticationEntryPointImpl;
+import com.wf.core.security.handler.AccessDeniedHandlerImpl;
+import com.wf.core.security.handler.AuthenticationEntryPointImpl;
 import com.wf.core.security.filter.JwtAuthenticationTokenFilter;
-import com.wf.core.security.service.UserDetailsServiceImpl;
+import com.wf.core.service.UserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -60,8 +60,7 @@ public class SecurityConfig {
                 // 权限设置
                 .authorizeRequests(authorize -> authorize
                         // 请求放开
-//                        .antMatchers("/**").permitAll()
-//                        .antMatchers("/**").permitAll()
+                        .antMatchers("/task/hello").permitAll()
                         // 其他地址的访问均需验证权限
                         .anyRequest().authenticated()
                 )
@@ -82,5 +81,4 @@ public class SecurityConfig {
         source.registerCorsConfiguration("/**", new CorsConfiguration().applyPermitDefaultValues());
         return source;
     }
-
 }
