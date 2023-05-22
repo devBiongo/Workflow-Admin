@@ -22,7 +22,7 @@ public class SysUserService {
 
     public SysUserEntity selectUserByUsername(String username){
         QueryWrapper<SysUserEntity> queryWrapper = new QueryWrapper<>();
-        queryWrapper.eq("username", username);
+        queryWrapper.eq("user_name", username);
         return securityUserMapper.selectOne(queryWrapper);
     }
 

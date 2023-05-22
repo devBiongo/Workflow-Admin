@@ -1,5 +1,6 @@
 package com.wf.core.service;
 
+import com.wf.core.model.system.entity.SysMenuEntity;
 import com.wf.core.model.system.entity.SysUserEntity;
 import com.wf.core.common.enums.UserStatus;
 import com.wf.core.model.security.LoginUser;
@@ -12,6 +13,11 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
 /**
  * 用户验证处理
  *
@@ -23,13 +29,15 @@ public class UserDetailsServiceImpl implements UserDetailsService
     private static final Logger log = LoggerFactory.getLogger(UserDetailsServiceImpl.class);
 
     @Autowired
-    private SysUserService securityUserService;
+    private SysUserService sysUserService;
 
+    @Autowired
+    private SysMenuService sysMenuService;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException
     {
-        SysUserEntity user = securityUserService.selectUserByUsername(username);
+        SysUserEntity user = sysUserService.selectUserByUsername(username);
         if (StringUtils.isNull(user))
         {
             log.info("登录用户：{} 不存在.", username);
@@ -45,11 +53,19 @@ public class UserDetailsServiceImpl implements UserDetailsService
             log.info("登录用户：{} 已被停用.", username);
             throw new RuntimeException("对不起，您的账号：" + username + " 已停用");
         }
-        return createLoginUser(null);
+        return createLoginUser(user);
     }
 
     public UserDetails createLoginUser(SysUserEntity user)
     {
-        return new LoginUser();
+        LoginUser loginUser = new LoginUser();
+//        List<SysMenuEntity> menus = sysMenuService.selectMenuTreeByUserId(loginUser.getUsername());
+        Set<String> permissions = new HashSet<>();
+//        for(SysMenuEntity menu : menus){
+//            permissions.add(menu.getPerms());
+//        }
+        loginUser.setUser(user);
+        loginUser.setPermissions(permissions);
+        return loginUser;
     }
 }

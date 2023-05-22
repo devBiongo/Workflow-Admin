@@ -60,7 +60,8 @@ public class SecurityConfig {
                 // 权限设置
                 .authorizeRequests(authorize -> authorize
                         // 请求放开
-                        .antMatchers("/task/hello").permitAll()
+                        .antMatchers("/user/login").permitAll()
+                        .antMatchers("/user/register").permitAll()
                         // 其他地址的访问均需验证权限
                         .anyRequest().authenticated()
                 )

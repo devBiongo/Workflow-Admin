@@ -18,12 +18,12 @@
     <dependencies>
         <dependency>
             <groupId>com.wf</groupId>
-            <artifactId>workflow-notification</artifactId>
+            <artifactId>workflow-general</artifactId>
             <version>${project.parent.version}</version>
         </dependency>
         <dependency>
             <groupId>com.wf</groupId>
-            <artifactId>workflow-user</artifactId>
+            <artifactId>workflow-notification</artifactId>
             <version>${project.parent.version}</version>
         </dependency>
         <dependency>

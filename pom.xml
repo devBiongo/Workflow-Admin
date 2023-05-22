@@ -17,10 +17,10 @@
 
     <modules>
         <module>workflow-core</module>
-        <module>workflow-user</module>
         <module>workflow-entrance</module>
         <module>workflow-task</module>
         <module>workflow-notification</module>
+        <module>workflow-general</module>
     </modules>
 
     <!--  バージョン管理  -->
