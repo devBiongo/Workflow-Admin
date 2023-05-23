@@ -1,4 +1,4 @@
-package com.wf.core.manager.factory;
+package com.wf.core.config.manager.factory;
 
 import com.wf.core.common.constants.Constants;
 import com.wf.core.common.utils.LogUtil;

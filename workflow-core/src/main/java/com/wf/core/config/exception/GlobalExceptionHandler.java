@@ -1,4 +1,4 @@
-package com.wf.core.exception;
+package com.wf.core.config.exception;
 
 import com.wf.core.model.response.AjaxResult;
 import org.slf4j.Logger;

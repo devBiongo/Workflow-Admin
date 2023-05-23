@@ -1,4 +1,4 @@
-package com.wf.core.manager;
+package com.wf.core.config.manager;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

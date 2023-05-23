@@ -1,4 +1,4 @@
-package com.wf.core.manager;
+package com.wf.core.config.manager;
 
 import com.wf.core.common.utils.Threads;
 import com.wf.core.common.utils.spring.SpringUtil;

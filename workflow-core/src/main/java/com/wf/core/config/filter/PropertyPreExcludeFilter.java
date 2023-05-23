@@ -1,4 +1,4 @@
-package com.wf.core.common.filter;
+package com.wf.core.config.filter;
 
 import com.alibaba.fastjson2.filter.SimplePropertyPreFilter;
 
