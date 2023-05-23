@@ -1,7 +1,7 @@
 package com.wf.core.common.utils.http;
 
 import com.wf.core.common.constants.Constants;
-import com.wf.core.common.utils.StringUtils;
+import com.wf.core.common.utils.StringUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -19,9 +19,9 @@ import java.security.cert.X509Certificate;
  * 
  * @author Joffrey
  */
-public class HttpUtils
+public class HttpUtil
 {
-    private static final Logger log = LoggerFactory.getLogger(HttpUtils.class);
+    private static final Logger log = LoggerFactory.getLogger(HttpUtil.class);
 
     /**
      * 向指定 URL 发送GET方法的请求
@@ -31,7 +31,7 @@ public class HttpUtils
      */
     public static String sendGet(String url)
     {
-        return sendGet(url, StringUtils.EMPTY);
+        return sendGet(url, StringUtil.EMPTY);
     }
 
     /**
@@ -60,7 +60,7 @@ public class HttpUtils
         BufferedReader in = null;
         try
         {
-            String urlNameString = StringUtils.isNotBlank(param) ? url + "?" + param : url;
+            String urlNameString = StringUtil.isNotBlank(param) ? url + "?" + param : url;
             log.info("sendGet - {}", urlNameString);
             URL realUrl = new URL(urlNameString);
             URLConnection connection = realUrl.openConnection();

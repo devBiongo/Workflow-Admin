@@ -1,6 +1,6 @@
 package com.wf.core.common.utils.text;
 
-import com.wf.core.common.utils.StringUtils;
+import com.wf.core.common.utils.StringUtil;
 
 /**
  * 字符串格式化
@@ -29,7 +29,7 @@ public class StrFormatter
      */
     public static String format(final String strPattern, final Object... argArray)
     {
-        if (StringUtils.isEmpty(strPattern) || StringUtils.isEmpty(argArray))
+        if (StringUtil.isEmpty(strPattern) || StringUtil.isEmpty(argArray))
         {
             return strPattern;
         }

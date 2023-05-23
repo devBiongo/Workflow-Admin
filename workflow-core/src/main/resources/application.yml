@@ -14,8 +14,3 @@ mybatis-plus:
   mapper-locations: classpath*:mapper/**/*Mapper.xml
   configuration.log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
 
-#mybatis-plus:
-#  type-aliases-package: com.wf.**.model.**.entity
-#  mapper-locations: classpath:mapper/*.xml
-#  configuration.log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
-

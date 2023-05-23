@@ -4,19 +4,20 @@ import com.wf.core.model.system.entity.SysMenuEntity;
 import com.wf.core.model.system.entity.SysUserEntity;
 import com.wf.core.common.enums.UserStatus;
 import com.wf.core.model.security.LoginUser;
-import com.wf.core.common.utils.StringUtils;
+import com.wf.core.common.utils.StringUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * 用户验证处理
@@ -24,8 +25,7 @@ import java.util.Set;
  * @author Joffrey
  */
 @Service
-public class UserDetailsServiceImpl implements UserDetailsService
-{
+public class UserDetailsServiceImpl implements UserDetailsService {
     private static final Logger log = LoggerFactory.getLogger(UserDetailsServiceImpl.class);
 
     @Autowired
@@ -35,37 +35,25 @@ public class UserDetailsServiceImpl implements UserDetailsService
     private SysMenuService sysMenuService;
 
     @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException
-    {
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         SysUserEntity user = sysUserService.selectUserByUsername(username);
-        if (StringUtils.isNull(user))
-        {
-            log.info("登录用户：{} 不存在.", username);
-            throw new RuntimeException("登录用户：" + username + " 不存在");
-        }
-        else if (UserStatus.DELETED.getCode().equals(user.getDelFlag()))
-        {
-            log.info("登录用户：{} 已被删除.", username);
-            throw new RuntimeException("对不起，您的账号：" + username + " 已被删除");
-        }
-        else if (UserStatus.DISABLE.getCode().equals(user.getStatus()))
-        {
-            log.info("登录用户：{} 已被停用.", username);
-            throw new RuntimeException("对不起，您的账号：" + username + " 已停用");
+        if (StringUtil.isNull(user)) {
+            log.info("ユーザー：{} 存在しない。", username);
+            throw new RuntimeException("ユーザー：" + username + " 存在しない。");
+        } else if (UserStatus.DELETED.getCode().equals(user.getDelFlag())) {
+            log.info("ユーザー：{} 削除されました。", username);
+            throw new RuntimeException("ユーザー：" + username + " 削除されました。");
+        } else if (UserStatus.DISABLE.getCode().equals(user.getStatus())) {
+            log.info("ユーザー：{} 無効化されました。", username);
+            throw new RuntimeException("ユーザー：" + username + " 無効化されました。");
         }
         return createLoginUser(user);
     }
 
-    public UserDetails createLoginUser(SysUserEntity user)
-    {
-        LoginUser loginUser = new LoginUser();
-//        List<SysMenuEntity> menus = sysMenuService.selectMenuTreeByUserId(loginUser.getUsername());
-        Set<String> permissions = new HashSet<>();
-//        for(SysMenuEntity menu : menus){
-//            permissions.add(menu.getPerms());
-//        }
-        loginUser.setUser(user);
-        loginUser.setPermissions(permissions);
-        return loginUser;
+    public UserDetails createLoginUser(SysUserEntity user) {
+        List<SysMenuEntity> menus = sysMenuService.selectMenuTreeByUserId(user.getUserId());
+        Set<? extends GrantedAuthority> authorities = menus.stream().map(SysMenuEntity::getPerms)
+                .map(SimpleGrantedAuthority::new).collect(Collectors.toSet());
+        return new LoginUser(user,authorities);
     }
 }

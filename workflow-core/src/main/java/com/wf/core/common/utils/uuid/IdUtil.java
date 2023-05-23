@@ -5,7 +5,7 @@ package com.wf.core.common.utils.uuid;
  * 
  * @author Joffrey
  */
-public class IdUtils
+public class IdUtil
 {
     /**
      * 获取随机UUID

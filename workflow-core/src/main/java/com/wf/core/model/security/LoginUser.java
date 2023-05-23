@@ -16,6 +16,12 @@ import java.util.Set;
  */
 public class LoginUser implements UserDetails {
 
+
+    public LoginUser(SysUserEntity user, Collection<? extends GrantedAuthority> authorities) {
+        this.user = user;
+        Authorities = authorities;
+    }
+
     @Serial
     private static final long serialVersionUID = 1L;
 
@@ -37,7 +43,7 @@ public class LoginUser implements UserDetails {
     /**
      * 权限列表
      */
-    private Set<String> permissions;
+    private Collection<? extends GrantedAuthority> Authorities;
 
     /**
      * 用户信息
@@ -99,14 +105,18 @@ public class LoginUser implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
+        return this.Authorities;
+    }
+
+    public void setAuthorities(Collection<? extends GrantedAuthority> Authorities) {
+        this.Authorities = Authorities;
     }
 
     public Long getUserId() {
         return user.getUserId();
     }
 
-    public Long getDeptId(){
+    public Long getDeptId() {
         return user.getDeptId();
     }
 
@@ -132,14 +142,6 @@ public class LoginUser implements UserDetails {
 
     public void setOs(String os) {
         this.os = os;
-    }
-
-    public Set<String> getPermissions() {
-        return permissions;
-    }
-
-    public void setPermissions(Set<String> permissions) {
-        this.permissions = permissions;
     }
 
     public SysUserEntity getUser() {

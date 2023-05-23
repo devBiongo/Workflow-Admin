@@ -3,8 +3,8 @@ package com.wf.core.common.utils.ip;
 import com.alibaba.fastjson2.JSON;
 import com.alibaba.fastjson2.JSONObject;
 import com.wf.core.common.constants.Constants;
-import com.wf.core.common.utils.StringUtils;
-import com.wf.core.common.utils.http.HttpUtils;
+import com.wf.core.common.utils.StringUtil;
+import com.wf.core.common.utils.http.HttpUtil;
 import com.wf.core.config.WorkflowConfig;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,8 +14,8 @@ import org.slf4j.LoggerFactory;
  *
  * @author Joffrey
  */
-public class AddressUtils {
-    private static final Logger log = LoggerFactory.getLogger(AddressUtils.class);
+public class AddressUtil {
+    private static final Logger log = LoggerFactory.getLogger(AddressUtil.class);
 
     // IP地址查询
     public static final String IP_URL = "http://whois.pconline.com.cn/ipJson.jsp";
@@ -25,13 +25,13 @@ public class AddressUtils {
 
     public static String getRealAddressByIP(String ip) {
         // 内网不查询
-        if (IpUtils.internalIp(ip)) {
+        if (IpUtil.internalIp(ip)) {
             return "内网IP";
         }
         if (WorkflowConfig.isAddressEnabled()) {
             try {
-                String rspStr = HttpUtils.sendGet(IP_URL, "ip=" + ip + "&json=true", Constants.GBK);
-                if (StringUtils.isEmpty(rspStr)) {
+                String rspStr = HttpUtil.sendGet(IP_URL, "ip=" + ip + "&json=true", Constants.GBK);
+                if (StringUtil.isEmpty(rspStr)) {
                     log.error("获取地理位置异常 {}", ip);
                     return UNKNOWN;
                 }

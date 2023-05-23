@@ -1,6 +1,6 @@
 package com.wf.core.common.utils.text;
 
-import com.wf.core.common.utils.StringUtils;
+import com.wf.core.common.utils.StringUtil;
 
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
@@ -34,7 +34,7 @@ public class CharsetKit
      */
     public static Charset charset(String charset)
     {
-        return StringUtils.isEmpty(charset) ? Charset.defaultCharset() : Charset.forName(charset);
+        return StringUtil.isEmpty(charset) ? Charset.defaultCharset() : Charset.forName(charset);
     }
 
     /**
@@ -70,7 +70,7 @@ public class CharsetKit
             destCharset = StandardCharsets.UTF_8;
         }
 
-        if (StringUtils.isEmpty(source) || srcCharset.equals(destCharset))
+        if (StringUtil.isEmpty(source) || srcCharset.equals(destCharset))
         {
             return source;
         }

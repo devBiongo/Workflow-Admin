@@ -3,10 +3,9 @@ package com.wf.core.security.filter;
 import java.io.IOException;
 
 import com.wf.core.common.constants.CacheConstants;
-import com.wf.core.common.constants.Constants;
 import com.wf.core.common.redis.RedisCache;
 import com.wf.core.common.utils.JwtUtil;
-import com.wf.core.common.utils.StringUtils;
+import com.wf.core.common.utils.StringUtil;
 import com.wf.core.model.security.LoginUser;
 import com.wf.core.security.context.AuthenticationContextHolder;
 import io.jsonwebtoken.Claims;
@@ -31,17 +30,17 @@ import javax.servlet.http.HttpServletResponse;
 public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
 
     @Autowired
-    private RedisCache redisCacheUtils;
+    private RedisCache redisCache;
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response,
                                     FilterChain chain) throws ServletException, IOException {
         String jwt = JwtUtil.extractJwt(request);
-        if (StringUtils.isNotEmpty(jwt)) {
+        if (StringUtil.isNotEmpty(jwt)) {
             LoginUser loginUser = null;
             try {
                 Claims claims = JwtUtil.parseJWT(jwt);
-                loginUser = redisCacheUtils.getCacheObject(CacheConstants.LOGIN_TOKEN_KEY + claims.getId());
+                loginUser = redisCache.getCacheObject(CacheConstants.LOGIN_TOKEN_KEY + claims.getId());
             } catch (Exception e) {
                 AuthenticationContextHolder.clearContext();
                 throw new RuntimeException("认证失败");

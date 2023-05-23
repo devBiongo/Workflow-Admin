@@ -31,7 +31,7 @@ public class JwtUtil {
 
     public static String extractJwt(HttpServletRequest request) {
         String jwt = request.getHeader("Authentication");
-        if (StringUtils.isNotEmpty(jwt) && jwt.startsWith(Constants.TOKEN_PREFIX)) {
+        if (StringUtil.isNotEmpty(jwt) && jwt.startsWith(Constants.TOKEN_PREFIX)) {
             jwt = jwt.replace(Constants.TOKEN_PREFIX, "");
         }
         return jwt;

@@ -1,7 +1,7 @@
 package com.wf.core.common.utils.ip;
 
-import com.wf.core.common.utils.ServletUtils;
-import com.wf.core.common.utils.StringUtils;
+import com.wf.core.common.utils.ServletUtil;
+import com.wf.core.common.utils.StringUtil;
 
 import javax.servlet.http.HttpServletRequest;
 import java.net.InetAddress;
@@ -12,7 +12,7 @@ import java.net.UnknownHostException;
  * 
  * @author Joffrey
  */
-public class IpUtils
+public class IpUtil
 {
     public final static String REGX_0_255 = "(25[0-5]|2[0-4]\\d|1\\d{2}|[1-9]\\d|\\d)";
     // 匹配 ip
@@ -28,7 +28,7 @@ public class IpUtils
      */
     public static String getIpAddr()
     {
-        return getIpAddr(ServletUtils.getRequest());
+        return getIpAddr(ServletUtil.getRequest());
     }
 
     /**
@@ -89,7 +89,7 @@ public class IpUtils
      */
     private static boolean internalIp(byte[] addr)
     {
-        if (StringUtils.isNull(addr) || addr.length < 2)
+        if (StringUtil.isNull(addr) || addr.length < 2)
         {
             return true;
         }
@@ -267,7 +267,7 @@ public class IpUtils
                 }
             }
         }
-        return StringUtils.substring(ip, 0, 255);
+        return StringUtil.substring(ip, 0, 255);
     }
 
     /**
@@ -278,7 +278,7 @@ public class IpUtils
      */
     public static boolean isUnknown(String checkString)
     {
-        return StringUtils.isBlank(checkString) || "unknown".equalsIgnoreCase(checkString);
+        return StringUtil.isBlank(checkString) || "unknown".equalsIgnoreCase(checkString);
     }
 
     /**
@@ -286,7 +286,7 @@ public class IpUtils
      */
     public static boolean isIP(String ip)
     {
-        return StringUtils.isNotBlank(ip) && ip.matches(REGX_IP);
+        return StringUtil.isNotBlank(ip) && ip.matches(REGX_IP);
     }
 
     /**
@@ -294,7 +294,7 @@ public class IpUtils
      */
     public static boolean isIpWildCard(String ip)
     {
-        return StringUtils.isNotBlank(ip) && ip.matches(REGX_IP_WILDCARD);
+        return StringUtil.isNotBlank(ip) && ip.matches(REGX_IP_WILDCARD);
     }
 
     /**
@@ -321,7 +321,7 @@ public class IpUtils
      */
     public static boolean isIPSegment(String ipSeg)
     {
-        return StringUtils.isNotBlank(ipSeg) && ipSeg.matches(REGX_IP_SEG);
+        return StringUtil.isNotBlank(ipSeg) && ipSeg.matches(REGX_IP_SEG);
     }
 
     /**
@@ -358,7 +358,7 @@ public class IpUtils
      */
     public static boolean isMatchedIp(String filter, String ip)
     {
-        if (StringUtils.isEmpty(filter) || StringUtils.isEmpty(ip))
+        if (StringUtil.isEmpty(filter) || StringUtil.isEmpty(ip))
         {
             return false;
         }

@@ -1,7 +1,7 @@
 package com.wf.core.common.utils.uuid;
 
-import com.wf.core.common.utils.DateUtils;
-import com.wf.core.common.utils.StringUtils;
+import com.wf.core.common.utils.DateUtil;
+import com.wf.core.common.utils.StringUtil;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -60,7 +60,7 @@ public class Seq
      */
     public static String getId(AtomicInteger atomicInt, int length)
     {
-        String result = DateUtils.dateTimeNow();
+        String result = DateUtil.dateTimeNow();
         result += machineCode;
         result += getSeq(atomicInt, length);
         return result;
@@ -83,6 +83,6 @@ public class Seq
             atomicInt.set(1);
         }
         // 转字符串，用0左补齐
-        return StringUtils.padl(value, length);
+        return StringUtil.padl(value, length);
     }
 }
