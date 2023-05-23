@@ -1,5 +1,5 @@
 -- ----------------------------
--- 1、用户信息表
+-- 用户信息表
 -- ----------------------------
 drop table if exists sys_user;
 create table sys_user (
@@ -26,7 +26,7 @@ create table sys_user (
 ) engine=innodb auto_increment=100 comment = '用户信息表';
 
 -- ----------------------------
--- 2、角色信息表
+-- 角色信息表
 -- ----------------------------
 drop table if exists sys_role;
 create table sys_role (
@@ -48,7 +48,7 @@ create table sys_role (
 ) engine=innodb auto_increment=100 comment = '角色信息表';
 
 -- ----------------------------
--- 3、菜单权限表
+-- 菜单权限表
 -- ----------------------------
 drop table if exists sys_menu;
 create table sys_menu (
@@ -75,7 +75,7 @@ create table sys_menu (
 ) engine=innodb auto_increment=2000 comment = '菜单权限表';
 
 -- ----------------------------
--- 4、部门表
+-- 部门表
 -- ----------------------------
 drop table if exists sys_dept;
 create table sys_dept (
@@ -97,7 +97,7 @@ create table sys_dept (
 ) engine=innodb auto_increment=200 comment = '部门表';
 
 -- ----------------------------
--- 5、用户和角色关联表  用户N-1角色
+-- 用户和角色关联表  用户N-1角色
 -- ----------------------------
 drop table if exists sys_user_role;
 create table sys_user_role (
@@ -107,7 +107,7 @@ create table sys_user_role (
 ) engine=innodb comment = '用户和角色关联表';
 
 -- ----------------------------
--- 6、角色和菜单关联表  角色1-N菜单
+-- 角色和菜单关联表  角色1-N菜单
 -- ----------------------------
 drop table if exists sys_role_menu;
 create table sys_role_menu (
@@ -117,7 +117,7 @@ create table sys_role_menu (
 ) engine=innodb comment = '角色和菜单关联表';
 
 -- ----------------------------
--- 7、角色和部门关联表  角色1-N部门
+-- 角色和部门关联表  角色1-N部门
 -- ----------------------------
 drop table if exists sys_role_dept;
 create table sys_role_dept (
@@ -127,7 +127,7 @@ create table sys_role_dept (
 ) engine=innodb comment = '角色和部门关联表';
 
 -- ----------------------------
--- 14、系统访问记录
+-- 系统访问记录
 -- ----------------------------
 drop table if exists sys_loginInfo;
 create table sys_loginInfo (
@@ -146,7 +146,7 @@ create table sys_loginInfo (
 ) engine=innodb auto_increment=100 comment = '系统访问记录';
 
 -- ----------------------------
--- 10、操作日志记录
+-- 操作日志记录
 -- ----------------------------
 drop table if exists sys_oper_log;
 create table sys_oper_log (
